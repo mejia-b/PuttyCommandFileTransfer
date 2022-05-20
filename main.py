@@ -49,6 +49,8 @@ def select_file():
    
 def run_command():
     pass
+#////// Variables ////////
+option = tk.StringVar()
 #////////////////////// CREATE WIDGETS //////////////////////////  
 # create input box which will display the path chosen
 input_path = EntryWithPlaceholder(root,"Select a Path")
@@ -58,14 +60,16 @@ remote_path = EntryWithPlaceholder(root,"Remote Path")
 username_input = EntryWithPlaceholder(root,"Username")
 #create address input box
 address_input = EntryWithPlaceholder(root,"Address")
+# create password input box
+password_input = EntryWithPlaceholder(root,"Password")
 # select path button 
 select_button = ttk.Button(root,text='Select Path',command=select_file)
 # run command button
 run_button = ttk.Button(root,text="Run command",command = run_command)
 # radio option source
-source_radio = ttk.Radiobutton(root,text="Source")
+source_radio = ttk.Radiobutton(root,text="Source",value= "S",variable=option)
 # radio option destination
-destination_radio = ttk.Radiobutton(root,text="Destination")
+destination_radio = ttk.Radiobutton(root,text="Destination",value="D",variable=option)
 
 #//////////// PLACE IN WINDOW ///////////////////////////////////////////////
 # display the path chosen from pressing select path button
@@ -75,6 +79,12 @@ remote_path.place(x=50,y=80)
 # username input box
 username_input.place(x=50,y=130)
 # address input box
+address_input.place(x=50,y=160)
+# password input box -> once command is run 
+# successfuly it will require the password
+# in order to transfer the folder(s)/file(s)
+password_input.place(x=50,y=190)
+# select button will allow for choosing a file path
 select_button.place(x=190,y=47)
 # radio option source
 source_radio.place(x=280,y=40)
