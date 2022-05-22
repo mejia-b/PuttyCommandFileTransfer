@@ -10,8 +10,8 @@ root.title("Putty Command File Transfer")
 root.geometry("400x300")
 #////////////////////////////////////////////////////////
 class EntryWithPlaceholder(tk.Entry):
-    def __init__(self, master=None, placeholder="PLACEHOLDER", color='grey'):
-        super().__init__(master)
+    def __init__(self, master=None, placeholder="PLACEHOLDER", color='grey',show=""):
+        super().__init__(master,cnf={},show=show)
 
         self.placeholder = placeholder
         self.placeholder_color = color
@@ -51,6 +51,8 @@ def run_command():
     pass
 #////// Variables ////////
 option = tk.StringVar()
+
+
 #////////////////////// CREATE WIDGETS //////////////////////////  
 # create input box which will display the path chosen
 input_path = EntryWithPlaceholder(root,"Select a Path")
@@ -61,7 +63,7 @@ username_input = EntryWithPlaceholder(root,"Username")
 #create address input box
 address_input = EntryWithPlaceholder(root,"Address")
 # create password input box
-password_input = EntryWithPlaceholder(root,"Password")
+password_input = EntryWithPlaceholder(root,"Password",show="*")
 # select path button 
 select_button = ttk.Button(root,text='Select Path',command=select_file)
 # run command button
