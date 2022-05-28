@@ -59,9 +59,15 @@ def select_file():
    
 def run_command():
     if option.get() == 'S':
-        pass
+        command = fr'pscp -P 22 -pw {password_input.get_text()} {input_path.get_text()} {username_input.get_text()}@{address_input.get_text()}:/{second_path.get_text()}'
+        print(command)
+        subprocess.run(command,shell=True)
+        print("Command was run successfully!")
     elif option.get() == 'D':
-        pass
+        command = fr'pscp -P 22 -pw {password_input.get_text()}  {username_input.get_text()}@{address_input.get_text()}:/{second_path.get_text()} {input_path.get_text()}'
+        print(command)
+        subprocess.run(command,shell=True)
+        print("Command was run successfully!")
 
 #////// Variables ////////
 option = tk.StringVar()
@@ -71,8 +77,8 @@ filename = tk.StringVar()
 #////////////////////// CREATE WIDGETS //////////////////////////  
 # create input box which will display the path chosen
 input_path = EntryWithPlaceholder(root,"Select a Path")
-#create remote_path entr box
-remote_path = EntryWithPlaceholder(root,"Remote Path")
+#create remote_path entry box
+second_path = EntryWithPlaceholder(root,"Second Path")
 #create username input box
 username_input = EntryWithPlaceholder(root,"Username")
 #create address input box
@@ -92,7 +98,7 @@ destination_radio = ttk.Radiobutton(root,text="Destination",value="D",variable=o
 # display the path chosen from pressing select path button
 input_path.place(x=50,y=50)
 # enter remote path
-remote_path.place(x=50,y=80)
+second_path.place(x=50,y=80)
 # username input box
 username_input.place(x=50,y=130)
 # address input box
