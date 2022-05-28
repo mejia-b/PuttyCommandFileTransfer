@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk # library for modern themed widgets
 from tkinter import filedialog as fd
 from tkinter.messagebox import showinfo
 import subprocess
@@ -10,8 +10,8 @@ root.title("Putty Command File Transfer")
 root.geometry("400x300")
 #////////////////////////////////////////////////////////
 class EntryWithPlaceholder(tk.Entry):
-    def __init__(self, master=None, placeholder="PLACEHOLDER", color='grey',show=""):
-        super().__init__(master,cnf={},show=show)
+    def __init__(self, master=None, placeholder="PLACEHOLDER", color='grey',show="",textvariable="",command=None):
+        super().__init__(master,cnf={},show=show,textvariable=textvariable)
 
         self.placeholder = placeholder
         self.placeholder_color = color
@@ -25,6 +25,15 @@ class EntryWithPlaceholder(tk.Entry):
     def put_placeholder(self):
         self.insert(0, self.placeholder)
         self['fg'] = self.placeholder_color
+    # when select path button is clicked and user selects the file path
+    # this function can be used to display the path on to the EntryWithPlaceholder instance widget
+    def display_path(self,text):
+        self.delete('0','end')
+        self.insert(0,text)
+        self['fg'] = 'black'
+    # wrapper function that gets the text from the EntryWithPlaceholder instance
+    def get_text(self):
+        return self.get()
 
     def foc_in(self, *args):
         if self['fg'] == self.placeholder_color:
@@ -40,17 +49,23 @@ def select_file():
         ('text files', '*.txt'),
         ('All files', '*.*')
     )
-    global filename
 
     filename = fd.askopenfilename(
         title='Open a file',
         initialdir='/',
         filetypes=filetypes)
+    filename = '"' + filename + '"'
+    input_path.display_path(text=filename)
    
 def run_command():
-    pass
+    if option.get() == 'S':
+        pass
+    elif option.get() == 'D':
+        pass
+
 #////// Variables ////////
 option = tk.StringVar()
+filename = tk.StringVar()
 
 
 #////////////////////// CREATE WIDGETS //////////////////////////  
@@ -92,6 +107,8 @@ select_button.place(x=190,y=47)
 source_radio.place(x=280,y=40)
 # radio option destination
 destination_radio.place(x=280,y=60)
+# run button to run subprocess command
+run_button.place(x=150,y=250)
 
 
 
